@@ -1,17 +1,17 @@
-# Robot Desviador
+# Robo Desviador
 
-![Circuito Elétrico](d:\C++ códigos\arduino\arduino-robo-desviador\Print-scheme.png)
+![Circuito Elétrico](https://github.com/Maarzano/arduino-robo-desviador/blob/master/Print-scheme.png)
 
 Este projeto apresenta um robô capaz de evitar obstáculos usando sensores e um algoritmo de evasão. O esquema elétrico exibido acima foi gerado utilizando o software Fritzing.
 
-## imagem Demonstrativa do Robo
+## Imagem Demonstrativa do Robo
 
-![Imagem Robo](d:\C++ códigos\arduino\arduino-robo-desviador\Imagem-Robo.jpg)
+![Imagem Robo](https://github.com/Maarzano/arduino-robo-desviador/blob/master/Imagem-Robo.jpg)
 
-## Trabalho Baseado no canal
+## Trabalho Baseado no Canal
 
 - Eduardo Fritzen - ConectaBit
 
-## Demonstração de como seria o funcionamento do robo
+## Demonstração de Como Seria o Funcionamento do Robo
 
-![video do robo](d:\C++ códigos\arduino\arduino-robo-desviador\Vídeo Demonstrativo.mp4)
+![video do robo](https://github.com/Maarzano/arduino-robo-desviador/blob/master/V%C3%ADdeo%20Demonstrativo.mp4)
