@@ -1,13 +1,3 @@
-/***************************************************
- * Autor: Eduardo Fritzen
- * Data de Criação: 17 de Setembro de 2023
- * Empresa: ConectaBit
- * Descrição: Este é um exemplo de código Arduino que faz o controle do robô que evita obstáculos
- * Site: https://fritzen.io
- * Site: https://www.conectabit.com.br
- * Licença: MIT 
- ***************************************************/
-
 // Define os pinos dos motores
 #define LEFT_MOTOR_BACKWARD 5
 #define LEFT_MOTOR_FORWARD 6
@@ -15,31 +5,25 @@
 #define RIGHT_MOTOR_FORWARD 8
 
 // Define os pinos do sensor ultrassônico
-//O módulo HC-SR04 requer um sinal PWM para disparar o pulso ultrassônico e medir a distância.
-//No Arduino Nano, as portas analógicas podem ser utilizadas para controlar o HC-SR04, desde que corretamente utilizadas
 #define ECHO_PIN A4
 #define TRIGGER_PIN A5
 
-
+// Define os pinos do sensor ultrassônico
 #define SPEED_INCREMENT 2
 #define INITIAL_MOTOR_SPEED 80
 
-int motorSpeed = INITIAL_MOTOR_SPEED; // Velocidade inicial do motor
+int motorSpeed = INITIAL_MOTOR_SPEED; // Variavel para velocidade inicial do motor
 
-
-
-
-// Define a distância mínima para o robô desviar de obstáculos (em centímetros)
-const int MIN_DISTANCE = 15;
+const int MIN_DISTANCE = 15; // Distância mínima para desvio em cm
 
 void setup() {
-  // Define os pinos como saída
+  // Define os pinos do motor como saída
   pinMode(LEFT_MOTOR_FORWARD, OUTPUT);
   pinMode(LEFT_MOTOR_BACKWARD, OUTPUT);
   pinMode(RIGHT_MOTOR_FORWARD, OUTPUT);
   pinMode(RIGHT_MOTOR_BACKWARD, OUTPUT);
 
-  // Define os pinos do sensor ultrassônico como entrada
+  // Define os pinos do sensor ultrassônico como entrada e sáida
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
@@ -48,12 +32,9 @@ void setup() {
 }
 
 void loop() {
-  // Mede a distância do objeto mais próximo
-  long distance = measureDistance();
+  long distance = measureDistance(); // Mede a distância do objeto mais próximo
 
-  // Verifica se há obstáculos próximos
   if (distance < MIN_DISTANCE) {
-    // Desvia do obstáculo
     motorSpeed = INITIAL_MOTOR_SPEED;
     moveBackward();
     delay(500);
@@ -65,7 +46,6 @@ void loop() {
     delay(150);
 
   } else {
-    // Move para frente
     moveForwardFull();
   }
 
@@ -74,7 +54,6 @@ void loop() {
   Serial.print(distance);
   Serial.println(" cm");
 }
-
 
 void stopMotors() {
   digitalWrite(LEFT_MOTOR_FORWARD, LOW);
@@ -85,7 +64,6 @@ void stopMotors() {
 
 void moveForwardFull() {
 
-
   digitalWrite(LEFT_MOTOR_FORWARD, HIGH);
   digitalWrite(RIGHT_MOTOR_FORWARD, HIGH);
 
@@ -94,12 +72,10 @@ void moveForwardFull() {
 
 }
 
-
-
 void moveForward() {
 
     // Aumenta gradualmente a velocidade do motor
-    if (motorSpeed < 255) { // 255 é a velocidade máxima (faixa de 0 a 255)
+    if (motorSpeed < 255) {
       motorSpeed = min(motorSpeed + SPEED_INCREMENT, 255); // Garante que a velocidade não exceda 255
     }
 
@@ -114,7 +90,6 @@ void moveForward() {
   
   delay(1);
 }
-
 
 void moveBackward() {
   digitalWrite(LEFT_MOTOR_FORWARD, LOW);
@@ -137,23 +112,7 @@ void turnRight() {
   digitalWrite(RIGHT_MOTOR_BACKWARD, HIGH);
 }
 
-
-/*
-
-Este método measureDistance é usado para medir a distância entre um sensor HC-SR04 e o objeto mais próximo. Ele emite pulsos ultrassônicos, mede o tempo que leva para eles retornarem e calcula a distância com base nesse tempo. O resultado é retornado em centímetros.
-
-
-O número 58 usado no cálculo da distância é uma constante que representa a velocidade do som em centímetros por microssegundo. O som viaja a uma velocidade aproximada de 343 metros por segundo (m/s) a uma temperatura de 20 graus Celsius. Isso equivale a cerca de 0,0343 centímetros por microssegundo.
-
-Como o sensor HC-SR04 mede o tempo de ida e volta do som, precisamos dividir esse tempo por dois para obter o tempo de ida apenas. Depois disso, basta multiplicar o tempo de ida por 0,0343 para obter a distância em centímetros. No entanto, como o sensor não é perfeito e há outros fatores que podem afetar a velocidade do som, um fator de conversão comumente usado é de 58, que é aproximadamente 0,0343 multiplicado por 2.
-
-Então, para converter o tempo de viagem do som em centímetros, dividimos o tempo por 58. Por exemplo, se o tempo de viagem do som for de 580 microssegundos, a distância seria calculada como 580 / 58 = 10 cm.
-
-É importante lembrar que a velocidade do som varia de acordo com a temperatura e a umidade, portanto, esse fator de conversão pode não ser preciso em todas as condições ambientais. Em aplicações que exigem maior precisão, é necessário ajustar o fator de conversão com base nas condições específicas do ambiente.
-*/
-
-
-long measureDistance() {
+long measureDistance() { //metódo de medição de distancia
   delay(50);
   long duration, distance;
   digitalWrite(TRIGGER_PIN, LOW);
@@ -162,11 +121,6 @@ long measureDistance() {
   delayMicroseconds(10);
   digitalWrite(TRIGGER_PIN, LOW);
   duration = pulseIn(ECHO_PIN, HIGH);
-  distance = duration / 58;
+  distance = duration / 58; // Converte a duração para distância
   return distance;
 }
-
-
-
-
-
