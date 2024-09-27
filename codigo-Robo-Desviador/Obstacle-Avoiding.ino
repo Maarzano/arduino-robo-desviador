@@ -8,7 +8,7 @@
 #define ECHO_PIN A4
 #define TRIGGER_PIN A5
 
-// Define os pinos do sensor ultrassônico
+// Define os pinos do motor
 #define SPEED_INCREMENT 2
 #define INITIAL_MOTOR_SPEED 80
 
