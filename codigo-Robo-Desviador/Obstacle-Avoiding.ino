@@ -11,7 +11,7 @@
 #define SPEED_INCREMENT 2
 #define INITIAL_MOTOR_SPEED 80
 
-int motorSpeed = INITIAL_MOTOR_SPEED; // Variavel para velocidade inicial do motor
+int motorSpeed = INITIAL_MOTOR_SPEED; // Variável para velocidade inicial do motor
 
 const int MIN_DISTANCE = 15; // Distância mínima para desvio em cm
 
@@ -22,7 +22,7 @@ void setup() {
   pinMode(RIGHT_MOTOR_FORWARD, OUTPUT);
   pinMode(RIGHT_MOTOR_BACKWARD, OUTPUT);
 
-  // Define os pinos do sensor ultrassônico como entrada e sáida
+  // Define os pinos do sensor ultrassônico como entrada e saída
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
@@ -43,7 +43,6 @@ void loop() {
     delay(600);
     stopMotors();
     delay(150);
-
   } else {
     moveForwardFull();
   }
@@ -62,32 +61,10 @@ void stopMotors() {
 }
 
 void moveForwardFull() {
-
   digitalWrite(LEFT_MOTOR_FORWARD, HIGH);
   digitalWrite(RIGHT_MOTOR_FORWARD, HIGH);
-
   digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
   digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
-
-}
-
-void moveForward() {
-
-    // Aumenta gradualmente a velocidade do motor
-    if (motorSpeed < 255) {
-      motorSpeed = min(motorSpeed + SPEED_INCREMENT, 255); // Garante que a velocidade não exceda 255
-    }
-
-  // Define a velocidade do motor
-  analogWrite(LEFT_MOTOR_FORWARD, motorSpeed);
-  analogWrite(RIGHT_MOTOR_FORWARD, motorSpeed);
-
-  // Move o motor para frente
-  digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
-  digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
-
-  
-  delay(1);
 }
 
 void moveBackward() {
@@ -97,13 +74,6 @@ void moveBackward() {
   digitalWrite(RIGHT_MOTOR_BACKWARD, HIGH);
 }
 
-void turnLeft() {
-  digitalWrite(LEFT_MOTOR_FORWARD, LOW);
-  digitalWrite(LEFT_MOTOR_BACKWARD, HIGH);
-  digitalWrite(RIGHT_MOTOR_FORWARD, HIGH);
-  digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
-}
-
 void turnRight() {
   digitalWrite(LEFT_MOTOR_FORWARD, HIGH);
   digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
@@ -111,7 +81,7 @@ void turnRight() {
   digitalWrite(RIGHT_MOTOR_BACKWARD, HIGH);
 }
 
-long measureDistance() { //metódo de medição de distancia
+long measureDistance() { // Método de medição de distância
   delay(50);
   long duration, distance;
   digitalWrite(TRIGGER_PIN, LOW);
