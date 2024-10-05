@@ -16,5 +16,3 @@ Link: https://www.tinkercad.com/things/9M25Ux57Fd2-robo-desviador
 ## Créditos
 
 O vídeo e a imagem foi encontrada no canal: (Eduardo Fritzen - ConectaBit)
-
-
